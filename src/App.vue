@@ -9,4 +9,6 @@ export default {
 </script>
 
 <style>
+@import './assets/style/reset.css';
+@import './assets/style/index.scss'
 </style>
