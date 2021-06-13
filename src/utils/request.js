@@ -14,7 +14,6 @@ const service = axios.create({
   timeout: 8000,
 })
 service.interceptors.request.use((req) => {
-  console.log(req)
   const headers = req.headers
   // 这一步是复杂类型引用
   if (!headers.Authorization) headers.Authorization = ' Bear Jack'
@@ -23,7 +22,6 @@ service.interceptors.request.use((req) => {
 service.interceptors.response.use((res) => {
   const { code, data, msg } = res.data
   if (code === 200) {
-    console.log(res)
     return data
   } else if (
     code === 40001) {
@@ -43,13 +41,18 @@ service.interceptors.response.use((res) => {
 function request(options) {
   options.method = options.method || 'get'
   if (options.method.toLowerCase() === 'get') {
-    options.params = options.data
+    options.params = options.data;
+  }
+  let isMock = config.mock;
+  if (typeof options.mock !== 'undefined') {
+    isMock = options.mock;
   }
   if (config.env === 'prod') {
     service.defaults.baseURL = config.baseApi
   } else {
-    service.defaults.baseURL = config.mock ? config.mockApi : config.baseApi
+    service.defaults.baseURL = isMock ? config.mockApi : config.baseApi
   }
+
   return service(options)
 }
 export default request

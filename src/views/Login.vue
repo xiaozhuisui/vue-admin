@@ -1,17 +1,25 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-05-25 15:10:24
+ * @LastEditTime: 2021-06-13 22:30:40
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /vue-admin/vue-admin/src/views/Login.vue
+-->
 <!--  -->
 <template>
   <div class="login-wrapper">
     <div class="modal">
       <el-form status-icon :model="user" :rules="rules" ref="userForm">
         <div class="title">火星</div>
-        <el-form-item prop="userName" >
+        <el-form-item prop="userName">
           <el-input type="text" prefix-icon="el-icon-user" v-model="user.userName" />
         </el-form-item>
-        <el-form-item prop="userPwd" >
+        <el-form-item prop="userPwd">
           <el-input type="password" prefix-icon="el-icon-view" v-model="user.userPwd" />
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" class="btn-login">登录</el-button>
+          <el-button type="primary" class="btn-login" @click="login">登录</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -38,6 +46,14 @@ export default {
     }
   },
   methods: {
+    login() {
+      this.$refs.userForm.validate(async (valid) => {
+        if (valid) {
+          const res = await this.$api.login(this.user)
+          this.$store.commit('saveUserInfo',res)
+          this.$router.push('/welcome')
+        }
+      })    }
   }
 }
 </script>
