@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-25 15:10:24
- * @LastEditTime: 2021-06-13 22:30:40
+ * @LastEditTime: 2021-06-14 17:56:10
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /vue-admin/vue-admin/src/views/Login.vue
@@ -50,10 +50,11 @@ export default {
       this.$refs.userForm.validate(async (valid) => {
         if (valid) {
           const res = await this.$api.login(this.user)
-          this.$store.commit('saveUserInfo',res)
+          this.$store.commit('saveUserInfo', res)
           this.$router.push('/welcome')
         }
-      })    }
+      })
+    }
   }
 }
 </script>

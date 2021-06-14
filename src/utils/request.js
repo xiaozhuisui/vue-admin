@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2021-05-26 09:56:20
+ * @LastEditTime: 2021-06-14 17:55:07
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /vue-admin/vue-admin/src/utils/request.js
+ */
 /**
  * 请求函数封装
  * axios 二次封装
@@ -24,7 +32,7 @@ service.interceptors.response.use((res) => {
   if (code === 200) {
     return data
   } else if (
-    code === 40001) {
+    code === 500001) {
     ElMessage.error(TOKEN_INVALID)
     setTimeout(() => {
       router.push('/login')
